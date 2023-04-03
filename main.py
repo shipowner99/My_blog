@@ -5,7 +5,7 @@ from datetime import date
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
-from forms import CreatePostForm,  RegisterForm, LoginForm, CommentForm
+from forms import CreatePostForm,  RegisterForm, LoginForm, CommentForm, ContactForm
 from flask_gravatar import Gravatar
 from functools import wraps
 from typing import List
@@ -163,18 +163,19 @@ def about():
 
 @app.route('/contact', methods=["POST", "GET"])
 def contact():
-    if request.method == "POST":
-        data = request.form
-        send_email(data["username"], data["email"], data["phone"], data["message"])
-        return render_template("contact.html", msg_sent=True)
-    return render_template("contact.html", msg_sent=False)
+    form = ContactForm()
+    if form.validate_on_submit():
+        send_email(form.username.data, form.email.data, form.phone.data, form.message.data)
+        return render_template("contact.html", form=form, msg_sent=True)
+    return render_template("contact.html", form=form, msg_sent=False)
+
 
 def send_email(name, email, phone, message):
     email_message = f"Subject:New Message\n\nName: {name}\nEmail: {email}\nPhone: {phone}\nMessage: {message}"
     with smtplib.SMTP("smtp.gmail.com") as connection:
         connection.starttls()
         connection.login(MY_EMAIL, MY_PASSWORD)
-        connection.sendmail(MY_EMAIL, MY_EMAIL, email_message)
+        connection.sendmail(MY_EMAIL, MY_EMAIL, email_message.encode("utf-8"))
 
 @app.route("/new-post", methods=["GET", "POST"])
 @admin_only
