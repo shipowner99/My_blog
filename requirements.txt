@@ -1,11 +1,11 @@
-Flask @ file:///C:/b/abs_ef16l83sif/croot/flask_1671217367534/work
+Flask==2.2.2
 Flask-Bootstrap==3.3.7.1
 Flask-CKEditor==0.4.6
 Flask-Gravatar==0.5.0
 Flask-Login==0.6.2
 Flask-SQLAlchemy==3.0.3
 Flask-WTF==1.1.1
-Jinja2 @ file:///C:/b/abs_7cdis66kl9/croot/jinja2_1666908141852/work
+Jinja2 ==3.1.2
 SQLAlchemy==2.0.8
-Werkzeug @ file:///C:/b/abs_8578rs2ra_/croot/werkzeug_1679489759009/work
+Werkzeug==2.2.3
 WTForms==3.0.1
