@@ -12,9 +12,11 @@ from typing import List
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import relationship, Mapped, mapped_column
 import smtplib
+import os
 
-MY_EMAIL = "vivathink99@gmail.com"
-MY_PASSWORD = "zzbfplpesxpairrs"
+
+MY_EMAIL = os.environ.get("EMAIL_USER")
+MY_PASSWORD = os.environ.get("EMAIL_PASSWORD")
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
